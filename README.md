@@ -25,7 +25,10 @@ Additional notes:
 * With Google Chrome, don't forget to install the "CORS Toggle" Browser extension
 to enable the source code to retrieve the JSON Object from the API Endpoint.
 * The source code utilises ES6 Babel Transpiler to convert ES6 code in ES5.
-Run 'npm start' in a node.JS environment after modifying the source code.
+Run 'npm start' in node.JS environment after modifying the source code.
+* The source code comes with unit test suites. It utilises Mocha Framework, and
+Chai Assertion Library. Run 'npm test' in Node.JS environment to see the test
+result.
 
 ### Alternative approach: ###
 With React.JS, I would be able to utilise the shouldComponentUpdate method to

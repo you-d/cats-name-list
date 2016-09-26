@@ -59,30 +59,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	/**************************************************
-	 * DESIGN DECISION :
-	 **************************************************
-	 * Instead of relying on 3rd party library to sort the retrieved JSON response
-	 * (such as Lodash.sortBy), I decided to filter the retrieved data, and store
-	 * the name of all cats in either one of 2 arrays
-	 * (maleOwnerCats, & femaleOwnerCats).
-	 *
-	 * The benefit of this approach are :
-	 * - Reduce Source code footprint.
-	 *   It's not necessary to include the 3rd party lodash library in the source code.
-	 * - Better Performance.
-	 *   Sorting 2 non-multidimensional arrays of string with JS sort function is
-	 *   definitely much faster than sorting a JSON object with a 3rd party library.
-	 **************************************************
-	 * HOW TO RUN THIS SOURCE CODE :
-	 **************************************************
-	 * Simply view the "index.html" file in any web browsers (double click the file).
-	 * The source code doesn't come with any backend code.
-	 * Don't forget to install the "CORS Toggle" Browser extension
-	 * to enable the source code to retrieve the JSON Object from the
-	 * API Endpoint.
-	 **************************************************/
-
-	/**************************************************
 	 * Perform the GET request to get the sample data
 	 **************************************************
 	 * DEV_NOTE :
@@ -103,19 +79,19 @@
 	//};
 
 	var config = {
-	  headers: { 'Accept': 'application/json',
-	    'Content-Type': 'application/json' }
+	     headers: { 'Accept': 'application/json',
+	          'Content-Type': 'application/json' }
 	};
 
 	_axios2.default.get('http://agl-developer-test.azurewebsites.net/people.json', config).then(function (response) {
-	  if (response.status == 200) {
-	    Process.processData(response.data);
-	  }
+	     if (response.status == 200) {
+	          Process.processData(response.data);
+	     }
 	}).catch(function (error) {
-	  var errorMsg = '<p>[ERROR] Empty Response</p>';
-	  document.getElementById('maleOwnerCats').innerHTML = errorMsg;
-	  document.getElementById('femaleOwnerCats').innerHTML = errorMsg;
-	  console.log('ERROR [FETCHING DATA] : ' + error);
+	     var errorMsg = '<p>[ERROR] Empty Response</p>';
+	     document.getElementById('maleOwnerCats').innerHTML = errorMsg;
+	     document.getElementById('femaleOwnerCats').innerHTML = errorMsg;
+	     console.log('ERROR [FETCHING DATA] : ' + error);
 	});
 
 /***/ },
@@ -1723,10 +1699,10 @@
 	exports.checkLv2DataStructure = checkLv2DataStructure;
 	exports.itsACat = itsACat;
 	function checkLv1DataStructure(aDataRow) {
-	    if (_typeof(aDataRow.gender) === undefined || aDataRow.gender === null || typeof aDataRow.gender !== 'string') {
+	    if (_typeof(aDataRow.gender) === undefined || aDataRow.gender === null || typeof aDataRow.gender !== 'string' || aDataRow.gender === '') {
 	        return false;
 	    }
-	    if (_typeof(aDataRow.pets) === undefined || aDataRow.pets === null || _typeof(aDataRow.pets) !== 'object') {
+	    if (_typeof(aDataRow.pets) === undefined || aDataRow.pets === null || !Array.isArray(aDataRow.pets) || aDataRow.pets.length == 0) {
 	        return false;
 	    }
 
@@ -1734,18 +1710,22 @@
 	}
 
 	function checkLv2DataStructure(aDataRow) {
-	    if (_typeof(aDataRow.name) === undefined || aDataRow.name === null || typeof aDataRow.name !== 'string') {
+	    if (_typeof(aDataRow.name) === undefined || aDataRow.name === null || typeof aDataRow.name !== 'string' || aDataRow.name === '') {
 	        return false;
 	    }
-	    if (_typeof(aDataRow.type) === undefined || aDataRow.type === null || typeof aDataRow.type !== 'string') {
+	    if (_typeof(aDataRow.type) === undefined || aDataRow.type === null || typeof aDataRow.type !== 'string' || aDataRow.type === '') {
 	        return false;
 	    }
 	    return true;
 	}
 
 	function itsACat(aDataRow) {
-	    if (aDataRow.type.toLowerCase().trim() === "cat") {
-	        return true;
+	    if (_typeof(aDataRow.type) === undefined || aDataRow.type === null || typeof aDataRow.type !== 'string' || aDataRow.type === '') {
+	        return false;
+	    } else {
+	        if (aDataRow.type.toLowerCase().trim() === "cat") {
+	            return true;
+	        }
 	    }
 
 	    return false;

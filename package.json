@@ -3,7 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "./node_modules/gulp/bin/gulp.js;"
+    "start": "./node_modules/gulp/bin/gulp.js;",
+    "test": "mocha --require ./tests/registerBabel.js ./tests/*.spec.js"
+  },
+  "devDependencies": {
+    "mocha": "^3.0.2",
+    "chai": "^3.5.0",
+    "babel-register": "^6.11.6"
   },
   "dependencies": {
     "babel-loader": "6.2.4",
