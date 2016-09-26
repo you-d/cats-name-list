@@ -1,14 +1,20 @@
+function genericCondition(target) {
+		return (typeof target === undefined || target === null);
+}
+
+function checkStringTypeData(target) {
+		return (typeof target !== 'string' || target === '');
+}
+
+function checkArrayTypeData(target) {
+		return (!Array.isArray( target ) || target.length == 0);
+}
+
 export function checkLv1DataStructure(aDataRow) {
-		if (typeof aDataRow.gender === undefined ||
-    		aDataRow.gender === null ||
-        typeof aDataRow.gender !== 'string' ||
-			  aDataRow.gender === '') {
+		if (genericCondition(aDataRow.gender) || checkStringTypeData(aDataRow.gender)) {
             return false;
     }
-    if (typeof aDataRow.pets === undefined ||
-    		aDataRow.pets === null ||
-				!Array.isArray( aDataRow.pets ) ||
-				aDataRow.pets.length == 0) {
+    if (genericCondition(aDataRow.pets) || checkArrayTypeData(aDataRow.pets)) {
         		return false;
     }
 
@@ -16,26 +22,17 @@ export function checkLv1DataStructure(aDataRow) {
 }
 
 export function checkLv2DataStructure(aDataRow) {
-		if (typeof aDataRow.name === undefined ||
-    		aDataRow.name === null ||
-        typeof aDataRow.name !== 'string' ||
-				aDataRow.name === '') {
+		if (genericCondition(aDataRow.name) || checkStringTypeData(aDataRow.name)) {
             return false;
     }
-    if (typeof aDataRow.type === undefined ||
-    		aDataRow.type === null ||
-        typeof aDataRow.type !== 'string' ||
-				aDataRow.type === '') {
+    if (genericCondition(aDataRow.type) || checkStringTypeData(aDataRow.type)) {
             return false;
     }
     return true;
 }
 
 export function itsACat(aDataRow) {
-		if (typeof aDataRow.type === undefined ||
-				aDataRow.type === null ||
-				typeof aDataRow.type !== 'string' ||
-				aDataRow.type === '') {
+		if (genericCondition(aDataRow.type) || checkStringTypeData(aDataRow.type)) {
 						return false;
 		} else {
 				if (aDataRow.type.toLowerCase().trim() === "cat") {
