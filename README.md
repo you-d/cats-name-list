@@ -20,11 +20,10 @@ definitely much faster than sorting a nested JSON object with a 3rd party librar
 
 ### How to run the source code: ###
 Simply view the "index.html" file in any web browsers (double click the file).
-The source code doesn't come with any backend code. Its purely frontend JS script.
+The source code doesn't come with any backend code. Its purely a frontend JS script.
 Additional notes:
-* Don't forget to install the "CORS Toggle" Browser extension
-to enable the source code to retrieve the JSON Object from the
-API Endpoint.
+* With Google Chrome, don't forget to install the "CORS Toggle" Browser extension
+to enable the source code to retrieve the JSON Object from the API Endpoint.
 * The source code utilises ES6 Babel Transpiler to convert ES6 code in ES5.
 Run 'npm start' in a node.JS environment after modifying the source code.
 
@@ -37,13 +36,13 @@ An owner component that will serve as the layout of the app, and two ownee
 components. Each ownee component represents a table (male or female cat owner)
 in the UI.
 
-The owner component will be responsible to retrieve the JSON object from the API
-endpoint, and populate both maleCatOwners, and femaleCatOwners arrays. Both arrays
-will be stored inside two React states, one state for each array.
+The retrieved JSON object will be passed to the owner component. The owner component
+will be responsible to process the retrieved data, and populate both maleCatOwners, and femaleCatOwners arrays.
+Both arrays will be stored inside two React states, one state for each array.
 
 Each state will be passed down to each ownee component. Both ownee components will
 call the 'shouldComponentUpdate' method to check whether the content of the state
-is equal to the version of array that each component already possess.
+is equal to the version of array that each component has already possessed.
 
 With this approach, we can ensure that only the ownee component with the state that
 has already been updated will be re-rendered.
